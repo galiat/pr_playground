@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   validates_presence_of :body
   validates_presence_of :title
 
+  attr_accessor :my_sentiment
+
   def no_author?(authors)
     authors.split(',').empty?
   end
