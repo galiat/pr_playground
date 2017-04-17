@@ -4,12 +4,7 @@ class Post < ApplicationRecord
   validates_presence_of :title
 
   def no_author?(authors)
-    list = authors.split(',')
-    if list.length == 0
-      return true
-    else
-      return false
-    end
+    authors.split(',').empty?
   end
 
   def determine_sentiment
