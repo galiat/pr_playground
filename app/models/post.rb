@@ -3,18 +3,13 @@ class Post < ApplicationRecord
   validates_presence_of :body
   validates_presence_of :title
 
+  attr_accessor :my_sentiment
+
   def no_author?(authors)
-    list = authors.split(',')
-    if list.length == 0
-      return true
-    else
-      return false
-    end
+    authors.split(',').empty?
   end
 
   def determine_sentiment
-    return if body.empty? && title.empty?
-    sentiment_level = SentimentAnalysisLib.new(sensitivity: 7).compute([body, title])
-    map_result(sentiment_level)
+    SentimentAnalysisService.determine_sentiment(body, title)
   end
 end
